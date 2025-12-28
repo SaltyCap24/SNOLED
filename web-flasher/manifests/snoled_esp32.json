@@ -1,0 +1,18 @@
+{
+  "name": "SNOLED ESP32",
+  "version": "0.16.0-alpha",
+  "home_assistant_domain": "wled",
+  "new_install_prompt_erase": true,
+  "new_install_erase": true,
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        { "path": "/firmware/snoled_esp32_bootloader.bin", "offset": 4096 },
+        { "path": "/firmware/snoled_esp32_partitions.bin", "offset": 32768 },
+        { "path": "/firmware/snoled_esp32_boot_app0.bin", "offset": 57344 },
+        { "path": "/firmware/snoled_esp32.bin", "offset": 65536 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "SNOLED ESP8266",
+  "version": "0.16.0-alpha",
+  "home_assistant_domain": "wled",
+  "new_install_prompt_erase": true,
+  "builds": [
+    {
+      "chipFamily": "ESP8266",
+      "parts": [
+        { "path": "../firmware/snoled_esp8266.bin", "offset": 0 }
+      ]
+    }
+  ]
+}

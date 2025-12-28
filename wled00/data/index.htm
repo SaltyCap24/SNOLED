@@ -7,12 +7,38 @@
 	<meta content="yes" name="apple-mobile-web-app-capable">
 	<link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAGACGAAAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgGAAAAH/P/YQAAAE1JREFUOI1j/P//PwOxgNGeAUMxE9G6cQCKDWAhpADZ2f8PMjBS3QW08QK20KaZC2gfC9hCnqouoNgARgY7zMxAyNlUdQHlXiAlO2MDAD63EVqNHAe0AAAAAElFTkSuQmCC"/>
 	<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAMAAAAKE/YAAAAANlBMVEUAAAAAKacAPv8APv8APv8APv8APv8AKacAQv8AJZsAKacAKacAPv8APv8AL8MAPv8APv8AQv/mTD7uAAAAEHRSTlMAf1mvpgzzka9/Vy3wnX9ic6GVaQAAAQhJREFUeNrt3EtuwkAQRdGGYAyYT9j/ZqN4GNkv9gSV4ZwVXJU8cVerGwAAAAAAUNTl9LXY6dJq6J/fiz37VsNuTfSu1SB6hmjRgWjRgWjRgWjRgWjRgehf5y1G70r/2Ha3w5T7foWhvVg3Pbxzq6w7lv5MRa8iWnQgWnQgWnQgWnQgWnQgenQtHT3spzxqT7p/+/MX0aJFj0SLDkSLDkSLDkSLDkSL/s/n7OhXRR8fNXb0q6KvrbSZSXetMtEzRIsORIsORIsORIsORIsORIdr/i+PHvYr3A9Tbsui7egn+2pf83//ky7RokWPRIsORIsORIsORIsORG/2gbhNPsUHAAAAAAD89QMg+PZb+jO0tAAAAABJRU5ErkJggg==" sizes="180x180"/>
-	<title>WLED</title>
+	<title>SNOLED</title>
 	<link rel="stylesheet" href="index.css">
+	<style>
+		#snoled-header {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 60px;
+			background: linear-gradient(135deg, #112a45 0%, #1a3a5a 100%);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+			z-index: 10000;
+			border-bottom: 2px solid #4db8ff;
+		}
+		#snoled-header img {
+			height: 45px;
+			margin: 0;
+		}
+		.wrapper { margin-top: 60px !important; }
+		#cv.overlay { background: linear-gradient(135deg, #0a1929 0%, #112a45 100%); }
+	</style>
 </head>
 <body onload="onLoad()">
 
-<div id="cv" class="overlay">Loading WLED UI...</div>
+<div id="snoled-header">
+	<img src="snoled-logo.svg" alt="SNOLED" />
+</div>
+
+<div id="cv" class="overlay">Loading SNOLED...</div>
 <noscript><div class="overlay" style="opacity:1;">Sorry, WLED UI needs JavaScript!</div></noscript>
 <div id="bg"></div>
 

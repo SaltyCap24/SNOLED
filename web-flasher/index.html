@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SNOLED Web Installer</title>
+  <meta name="description" content="Install SNOLED firmware on your ESP32 or ESP8266 device directly from your browser">
+  <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+
+    .container {
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      color: #667eea;
+      margin-top: 0;
+      font-size: 2.5em;
+      text-align: center;
+    }
+
+    .logo {
+      text-align: center;
+      font-size: 4em;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: #764ba2;
+      border-bottom: 2px solid #667eea;
+      padding-bottom: 10px;
+      margin-top: 30px;
+    }
+
+    .version-grid {
+      display: grid;
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .version-card {
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .version-card:hover {
+      border-color: #667eea;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+    }
+
+    .version-card h3 {
+      margin-top: 0;
+      color: #667eea;
+    }
+
+    .version-card p {
+      color: #666;
+      margin: 10px 0;
+    }
+
+    esp-web-install-button {
+      margin-top: 15px;
+      display: block;
+    }
+
+    esp-web-install-button::part(button) {
+      background-color: #667eea;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    esp-web-install-button::part(button):hover {
+      background-color: #764ba2;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .warning {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 6px;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    .warning strong {
+      color: #856404;
+    }
+
+    .info {
+      background: #d1ecf1;
+      border: 1px solid #17a2b8;
+      border-radius: 6px;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    .steps {
+      counter-reset: step-counter;
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .steps li {
+      counter-increment: step-counter;
+      margin: 15px 0;
+      padding-left: 40px;
+      position: relative;
+    }
+
+    .steps li::before {
+      content: counter(step-counter);
+      background: #667eea;
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #e0e0e0;
+      color: #666;
+    }
+
+    footer a {
+      color: #667eea;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">💡</div>
+    <h1>SNOLED Web Installer</h1>
+    <p style="text-align: center; font-size: 1.1em; color: #666;">
+      Flash SNOLED firmware to your ESP32 or ESP8266 directly from your browser
+    </p>
+
+    <div class="info">
+      <strong>ℹ️ Requirements:</strong>
+      <ul>
+        <li>Chrome, Edge, or Opera browser (Web Serial API required)</li>
+        <li>USB cable to connect your ESP device</li>
+        <li>No drivers or software installation needed!</li>
+      </ul>
+    </div>
+
+    <h2>📦 Choose Your Device</h2>
+
+    <div class="version-grid">
+      <!-- ESP32 Standard -->
+      <div class="version-card">
+        <h3>🔷 ESP32 Standard</h3>
+        <p><strong>For:</strong> ESP32-WROOM, ESP32-DevKit, NodeMCU-32S</p>
+        <p><strong>Flash:</strong> 4MB | <strong>Features:</strong> Full SNOLED features</p>
+        <esp-web-install-button
+          manifest="./manifests/snoled_esp32.json">
+          <button slot="activate">Install SNOLED ESP32</button>
+          <span slot="unsupported">Web Serial API not supported. Use Chrome, Edge, or Opera.</span>
+          <span slot="not-allowed">Not allowed to use Web Serial API. Check permissions.</span>
+        </esp-web-install-button>
+      </div>
+
+      <!-- ESP8266 -->
+      <div class="version-card">
+        <h3>🔶 ESP8266</h3>
+        <p><strong>For:</strong> NodeMCU, Wemos D1 Mini, ESP-12</p>
+        <p><strong>Flash:</strong> 2MB+ | <strong>Features:</strong> Core SNOLED features</p>
+        <esp-web-install-button
+          manifest="./manifests/snoled_esp8266.json">
+          <button slot="activate">Install SNOLED ESP8266</button>
+          <span slot="unsupported">Web Serial API not supported. Use Chrome, Edge, or Opera.</span>
+          <span slot="not-allowed">Not allowed to use Web Serial API. Check permissions.</span>
+        </esp-web-install-button>
+      </div>
+
+      <!-- ESP32-S3 -->
+      <div class="version-card">
+        <h3>🔷 ESP32-S3</h3>
+        <p><strong>For:</strong> ESP32-S3 DevKit, ESP32-S3-WROOM</p>
+        <p><strong>Flash:</strong> 16MB | <strong>Features:</strong> Maximum performance</p>
+        <esp-web-install-button
+          manifest="./manifests/snoled_esp32s3.json">
+          <button slot="activate">Install SNOLED ESP32-S3</button>
+          <span slot="unsupported">Web Serial API not supported. Use Chrome, Edge, or Opera.</span>
+          <span slot="not-allowed">Not allowed to use Web Serial API. Check permissions.</span>
+        </esp-web-install-button>
+      </div>
+
+      <!-- ESP32-C3 -->
+      <div class="version-card">
+        <h3>🔷 ESP32-C3</h3>
+        <p><strong>For:</strong> ESP32-C3 DevKit, compact boards</p>
+        <p><strong>Flash:</strong> 4MB | <strong>Features:</strong> Modern RISC-V architecture</p>
+        <esp-web-install-button
+          manifest="./manifests/snoled_esp32c3.json">
+          <button slot="activate">Install SNOLED ESP32-C3</button>
+          <span slot="unsupported">Web Serial API not supported. Use Chrome, Edge, or Opera.</span>
+          <span slot="not-allowed">Not allowed to use Web Serial API. Check permissions.</span>
+        </esp-web-install-button>
+      </div>
+    </div>
+
+    <div class="warning">
+      <strong>⚠️ Important:</strong> Flashing will erase your current firmware and settings. Make sure to backup any important configurations first!
+    </div>
+
+    <h2>📖 How to Install</h2>
+    <ol class="steps">
+      <li>Choose your device type above</li>
+      <li>Click the "Install SNOLED" button</li>
+      <li>Select your device's COM port when prompted</li>
+      <li>Wait for the installation to complete (2-3 minutes)</li>
+      <li>Connect to the SNOLED-AP WiFi network (password: wled1234)</li>
+      <li>Configure your WiFi and LED settings</li>
+    </ol>
+
+    <h2>🔧 After Installation</h2>
+    <ul>
+      <li><strong>WiFi AP:</strong> SNOLED-AP (password: wled1234)</li>
+      <li><strong>Web Interface:</strong> Connect to WiFi and visit http://snoled.local</li>
+      <li><strong>Default Settings:</strong> No LEDs configured - set up in Config → LED Preferences</li>
+      <li><strong>Updates:</strong> Use the built-in OTA updater or this web installer</li>
+    </ul>
+
+    <h2>❓ Troubleshooting</h2>
+    <ul>
+      <li><strong>Port not detected?</strong> Make sure you're using a data USB cable (not charge-only)</li>
+      <li><strong>Flash failed?</strong> Try holding the BOOT button while connecting</li>
+      <li><strong>Browser not supported?</strong> Use Chrome, Edge, or Opera (version 89+)</li>
+      <li><strong>Device not responding?</strong> Power cycle your ESP device and try again</li>
+    </ul>
+
+    <footer>
+      <p>SNOLED is based on <a href="https://kno.wled.ge" target="_blank">WLED</a></p>
+      <p><a href="https://github.com/yourusername/SNOLED" target="_blank">GitHub</a> | 
+         <a href="https://github.com/yourusername/SNOLED/issues" target="_blank">Report Issue</a></p>
+    </footer>
+  </div>
+
+  <script>
+    // Optional: Add analytics or custom behavior
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('SNOLED Web Installer loaded');
+    });
+  </script>
+</body>
+</html>

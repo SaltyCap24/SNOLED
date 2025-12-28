@@ -194,6 +194,7 @@ void sendImprovIPRPCResult(ImprovRPCType type) {
 }
 
 void sendImprovInfoResponse() {
+  // Send Improv device info with brand name
   char bString[32];
   #ifdef ESP8266
   strcpy(bString, "esp8266");
@@ -206,11 +207,11 @@ void sendImprovInfoResponse() {
   #endif
   strlwr(bString);
   #endif
-  //Use serverDescription if it has been changed from the default "WLED", else mDNS name
-  bool useMdnsName = (strcmp(serverDescription, "WLED") == 0 && strlen(cmDNS) > 0);
+  //Use serverDescription if it has been changed from the default brand name, else mDNS name
+  bool useMdnsName = (strcmp(serverDescription, WLED_BRAND) == 0 && strlen(cmDNS) > 0);
   char vString[32];
   sprintf_P(vString, PSTR("%s/%i"), versionString, VERSION);
-  const char *str[4] = {"WLED", vString, bString, useMdnsName ? cmDNS : serverDescription};
+  const char *str[4] = {WLED_BRAND, versionString, bString, useMdnsName ? cmDNS : serverDescription};
 
   sendImprovRPCResult(ImprovRPCType::Request_Info, 4, str);
 }
